@@ -82,6 +82,11 @@ async def available_slots(date: str = Query(..., description="Date in YYYY-MM-DD
 
     return JSONResponse(content={"date": date, "available_slots": available_slots})
 
+# Home route for render health check
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Appointment Booking API!"}
+
 # API to book an appointment
 @app.post('/api/book_appointment')
 async def book_appointment(appointment: Appointment, db: Session = Depends(get_db)):
